@@ -139,14 +139,18 @@ export function evaluateGuess(raw, species) {
   const joinedGuess = guessWords.join('');
 
   const commonWords = toWords(species.commonName);
-  const scientificWords = toWords(species.scientificName);
   const commonJoined = commonWords.join('');
 
-  const correct =
-    matchAgainst(guessWords, commonWords).correct ||
-    matchAgainst(guessWords, scientificWords).correct ||
-    wholeNameMatches(joinedGuess, commonJoined) ||
-    wholeNameMatches(joinedGuess, scientificWords.join(''));
+  // Every accepted name: common, scientific, and any aliases (e.g. "Killer
+  // Whale" for Orca). A guess is correct if it matches any of them.
+  const acceptedNames = [species.commonName, species.scientificName, ...(species.aliases || [])];
+  const correct = acceptedNames.some((name) => {
+    const targetWords = toWords(name);
+    return (
+      matchAgainst(guessWords, targetWords).correct ||
+      wholeNameMatches(joinedGuess, targetWords.join(''))
+    );
+  });
 
   // Highlight against the common name (what a player is most likely typing).
   const guessTokens = guessWords.map((word) => highlightForWord(word, commonWords, commonJoined));
