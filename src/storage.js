@@ -34,6 +34,12 @@ function save() {
   }
 }
 
+// Wipe all progress (used by demo mode's reset button).
+export function resetAll() {
+  state = defaultState();
+  save();
+}
+
 // ---- Play state (per day) -------------------------------------------------
 
 export function getPlay(dateKey) {
