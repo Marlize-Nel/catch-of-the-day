@@ -17,7 +17,7 @@ export function initQuiz(container, ctx) {
   // Local within-day guess counter; the persisted result is the source of truth
   // for whether the day is already finished.
   let stage = 1; // 1, 2, or 3
-  let lastHighlight = null;
+  let lastFeedback = null;
 
   render();
 
@@ -49,8 +49,8 @@ export function initQuiz(container, ctx) {
       wrap.append(el('p', 'quiz-hint', `💡 ${today.hint}`));
     }
 
-    if (lastHighlight) {
-      wrap.append(renderHighlight(lastHighlight));
+    if (lastFeedback) {
+      wrap.append(renderFeedback(lastFeedback));
     }
 
     if (stage < 3) {
@@ -61,16 +61,25 @@ export function initQuiz(container, ctx) {
     return wrap;
   }
 
-  function renderHighlight({ commonWords, highlight }) {
+  // Feedback echoes back only what the PLAYER typed — green where a word was
+  // right, plain where it was wrong. It never reveals unguessed words.
+  function renderFeedback({ guessTokens, anyMatched }) {
     const note = el('p', 'guess-feedback');
-    note.append(document.createTextNode('So close — you got '));
-    commonWords.forEach((w, i) => {
-      const span = el('span', highlight[i] ? 'word-correct' : 'word-plain', w);
-      note.append(span);
-      if (i < commonWords.length - 1) note.append(document.createTextNode(' '));
-    });
-    note.append(document.createTextNode(' right. Try again!'));
+    if (anyMatched) {
+      note.append(document.createTextNode('Not quite — but you got '));
+      guessTokens.forEach((t, i) => {
+        note.append(el('span', t.matched ? 'word-correct' : 'word-plain', cap(t.word)));
+        if (i < guessTokens.length - 1) note.append(document.createTextNode(' '));
+      });
+      note.append(document.createTextNode(' — the green word is right. Try again!'));
+    } else {
+      note.append(document.createTextNode('Not quite — that’s not it. Try again!'));
+    }
     return note;
+  }
+
+  function cap(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
   }
 
   function renderTextGuess() {
@@ -99,13 +108,13 @@ export function initQuiz(container, ctx) {
       if (result.correct) {
         win();
       } else {
-        lastHighlight = { commonWords: result.commonWords, highlight: result.highlight };
+        lastFeedback = { guessTokens: result.guessTokens, anyMatched: result.anyMatched };
         advance();
       }
     });
 
     noIdea.addEventListener('click', () => {
-      lastHighlight = null;
+      lastFeedback = null;
       advance();
     });
 

@@ -55,23 +55,18 @@ function wordMatches(guessWord, targetWord) {
 function matchAgainst(guessWords, targetWords) {
   const usedTarget = new Array(targetWords.length).fill(false);
   const matchedTargetIdx = new Set();
-  let unmatchedGuessWords = 0;
+  const matchedGuessIdx = new Set();
 
-  for (const gw of guessWords) {
-    let found = -1;
+  guessWords.forEach((gw, gi) => {
     for (let i = 0; i < targetWords.length; i++) {
       if (!usedTarget[i] && wordMatches(gw, targetWords[i])) {
-        found = i;
-        break;
+        usedTarget[i] = true;
+        matchedTargetIdx.add(i);
+        matchedGuessIdx.add(gi);
+        return;
       }
     }
-    if (found >= 0) {
-      usedTarget[found] = true;
-      matchedTargetIdx.add(found);
-    } else {
-      unmatchedGuessWords++;
-    }
-  }
+  });
 
   // Correct = no wrong words, and enough of the name covered. Single-word names
   // require that one word; multi-word names require at least two words so a bare
@@ -79,32 +74,36 @@ function matchAgainst(guessWords, targetWords) {
   const needed = Math.min(2, targetWords.length);
   const correct =
     guessWords.length > 0 &&
-    unmatchedGuessWords === 0 &&
+    matchedGuessIdx.size === guessWords.length &&
     matchedTargetIdx.size >= needed;
 
-  return { correct, matchedTargetIdx };
+  return { correct, matchedTargetIdx, matchedGuessIdx };
 }
 
 // Evaluate a raw text guess against a species.
 // Returns:
 //   correct     – boolean
-//   commonWords – the common name split into display words
-//   highlight    – boolean[] parallel to commonWords, true where a guess word matched
+//   guessTokens – the player's own words: { word, matched } (matched = fuzzily
+//                 hit a word in the name). We only ever echo back what the
+//                 player typed, so wrong guesses never reveal the answer.
+//   anyMatched  – true if at least one guess word was correct
 export function evaluateGuess(raw, species) {
   const guessWords = toWords(raw);
 
   const commonWords = toWords(species.commonName);
   const scientificWords = toWords(species.scientificName);
 
-  const correct =
-    matchAgainst(guessWords, commonWords).correct ||
-    matchAgainst(guessWords, scientificWords).correct;
+  const commonMatch = matchAgainst(guessWords, commonWords);
+  const correct = commonMatch.correct || matchAgainst(guessWords, scientificWords).correct;
 
-  // Highlight is always computed against the common name (what we display).
-  const { matchedTargetIdx } = matchAgainst(guessWords, commonWords);
-  const highlight = commonWords.map((_, i) => matchedTargetIdx.has(i));
+  // Highlight against the common name (what a player is most likely typing).
+  const guessTokens = guessWords.map((word, i) => ({
+    word,
+    matched: commonMatch.matchedGuessIdx.has(i),
+  }));
+  const anyMatched = guessTokens.some((t) => t.matched);
 
-  return { correct, commonWords, highlight };
+  return { correct, guessTokens, anyMatched };
 }
 
 // Build the shuffled multiple-choice options for guess 3 (correct + 2 decoys).
