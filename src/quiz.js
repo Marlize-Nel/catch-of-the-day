@@ -61,25 +61,35 @@ export function initQuiz(container, ctx) {
     return wrap;
   }
 
-  // Feedback echoes back only what the PLAYER typed — green where a word was
-  // right, plain where it was wrong. It never reveals unguessed words.
+  // Feedback echoes back only what the PLAYER typed, greening the parts that are
+  // on the right track (a whole word, or just a fragment like "sea" in "sea
+  // lion"). It never reveals unguessed words.
   function renderFeedback({ guessTokens, anyMatched }) {
     const note = el('p', 'guess-feedback');
     if (anyMatched) {
-      note.append(document.createTextNode('Not quite — but you got '));
+      note.append(document.createTextNode('Not quite — you typed '));
       guessTokens.forEach((t, i) => {
-        note.append(el('span', t.matched ? 'word-correct' : 'word-plain', cap(t.word)));
+        note.append(renderToken(t));
         if (i < guessTokens.length - 1) note.append(document.createTextNode(' '));
       });
-      note.append(document.createTextNode(' — the green word is right. Try again!'));
+      note.append(document.createTextNode(' — the green letters belong in the name. Try again!'));
     } else {
       note.append(document.createTextNode('Not quite — that’s not it. Try again!'));
     }
     return note;
   }
 
-  function cap(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
+  // One guess word with its correct [start,end) slice highlighted green.
+  function renderToken({ word, start, end }) {
+    const span = el('span', 'guess-token');
+    if (end <= start) {
+      span.append(el('span', 'word-plain', word));
+      return span;
+    }
+    if (start > 0) span.append(el('span', 'word-plain', word.slice(0, start)));
+    span.append(el('span', 'word-correct', word.slice(start, end)));
+    if (end < word.length) span.append(el('span', 'word-plain', word.slice(end)));
+    return span;
   }
 
   function renderTextGuess() {

@@ -197,6 +197,7 @@ body {
 
 /* ---- Feedback / highlight ---- */
 .guess-feedback { margin: 1rem 0 0.5rem; font-size: 1.05rem; }
+.guess-token { text-transform: capitalize; }
 .word-correct { color: var(--correct); font-weight: 800; }
 .word-plain { color: var(--muted); }
 

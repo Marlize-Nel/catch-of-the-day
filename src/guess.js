@@ -80,28 +80,77 @@ function matchAgainst(guessWords, targetWords) {
   return { correct, matchedTargetIdx, matchedGuessIdx };
 }
 
+// Space-insensitive whole-name check, so "sea horse" (or a light misspelling
+// like "seehorse") counts as "Seahorse". The whole guess and whole name are
+// compared with spaces stripped, allowing a few typos scaled to length.
+function wholeNameMatches(joinedGuess, joinedTarget) {
+  if (!joinedGuess || !joinedTarget) return false;
+  const len = joinedTarget.length;
+  const allowed = len <= 4 ? 1 : len <= 8 ? 2 : len <= 12 ? 3 : 4;
+  return levenshtein(joinedGuess, joinedTarget) <= allowed;
+}
+
+// The [start, end) range of the longest run of characters in `a` that also
+// appears contiguously in `b` (longest common substring). Used to green the
+// correct fragment of a guess word, e.g. "sea" inside "seahorse".
+function longestCommonSubstringRange(a, b) {
+  let best = 0;
+  let bestEnd = 0;
+  let prev = new Array(b.length + 1).fill(0);
+  for (let i = 1; i <= a.length; i++) {
+    const curr = new Array(b.length + 1).fill(0);
+    for (let j = 1; j <= b.length; j++) {
+      if (a[i - 1] === b[j - 1]) {
+        curr[j] = prev[j - 1] + 1;
+        if (curr[j] > best) {
+          best = curr[j];
+          bestEnd = i;
+        }
+      }
+    }
+    prev = curr;
+  }
+  return best > 0 ? [bestEnd - best, bestEnd] : [0, 0];
+}
+
+const MIN_FRAGMENT = 3; // shortest fragment worth highlighting green
+
+// Work out which characters of one guess word to highlight green.
+function highlightForWord(word, targetWords, targetJoined) {
+  // A whole-word (fuzzy) hit greens the entire word — e.g. "grat" → "great".
+  if (targetWords.some((tw) => wordMatches(word, tw))) {
+    return { word, start: 0, end: word.length };
+  }
+  // Otherwise green the longest correct fragment, if it's meaningfully long.
+  const [start, end] = longestCommonSubstringRange(word, targetJoined);
+  if (end - start >= MIN_FRAGMENT) return { word, start, end };
+  return { word, start: 0, end: 0 };
+}
+
 // Evaluate a raw text guess against a species.
 // Returns:
 //   correct     – boolean
-//   guessTokens – the player's own words: { word, matched } (matched = fuzzily
-//                 hit a word in the name). We only ever echo back what the
+//   guessTokens – the player's own words: { word, start, end } where [start,end)
+//                 is the char range to green. We only ever echo back what the
 //                 player typed, so wrong guesses never reveal the answer.
-//   anyMatched  – true if at least one guess word was correct
+//   anyMatched  – true if any fragment was greened
 export function evaluateGuess(raw, species) {
   const guessWords = toWords(raw);
+  const joinedGuess = guessWords.join('');
 
   const commonWords = toWords(species.commonName);
   const scientificWords = toWords(species.scientificName);
+  const commonJoined = commonWords.join('');
 
-  const commonMatch = matchAgainst(guessWords, commonWords);
-  const correct = commonMatch.correct || matchAgainst(guessWords, scientificWords).correct;
+  const correct =
+    matchAgainst(guessWords, commonWords).correct ||
+    matchAgainst(guessWords, scientificWords).correct ||
+    wholeNameMatches(joinedGuess, commonJoined) ||
+    wholeNameMatches(joinedGuess, scientificWords.join(''));
 
   // Highlight against the common name (what a player is most likely typing).
-  const guessTokens = guessWords.map((word, i) => ({
-    word,
-    matched: commonMatch.matchedGuessIdx.has(i),
-  }));
-  const anyMatched = guessTokens.some((t) => t.matched);
+  const guessTokens = guessWords.map((word) => highlightForWord(word, commonWords, commonJoined));
+  const anyMatched = guessTokens.some((t) => t.end > t.start);
 
   return { correct, guessTokens, anyMatched };
 }
