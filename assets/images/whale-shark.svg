@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img" aria-label="Whale shark illustration">
+  <path d="M18 92 C50 66 110 60 170 74 C196 80 214 88 226 96 C214 104 196 108 178 106 C200 118 210 132 212 146 C192 138 174 128 160 116 C112 128 56 122 30 106 C18 100 12 98 18 92 Z" fill="#3d5566"/>
+  <path d="M92 62 C100 40 116 32 126 28 C126 48 122 62 114 72 Z" fill="#3d5566"/>
+  <path d="M18 92 C50 82 110 82 160 90 C112 100 56 98 30 100 Z" fill="#8fa6b3"/>
+  <path d="M18 92 C30 88 40 88 48 90 C40 94 30 94 22 94 Z" fill="#f2f4f5"/>
+  <g fill="#dfe8ed">
+    <circle cx="80" cy="78" r="3.2"/><circle cx="100" cy="72" r="3.2"/><circle cx="120" cy="78" r="3.2"/><circle cx="140" cy="74" r="3.2"/><circle cx="160" cy="82" r="3.2"/>
+    <circle cx="92" cy="92" r="3.2"/><circle cx="112" cy="92" r="3.2"/><circle cx="132" cy="90" r="3.2"/><circle cx="152" cy="96" r="3.2"/>
+  </g>
+  <circle cx="42" cy="88" r="4" fill="#1c2830"/>
+</svg>

@@ -1,0 +1,119 @@
+[
+  {
+    "id": "great-white-shark",
+    "commonName": "Great White Shark",
+    "scientificName": "Carcharodon carcharias",
+    "image": "assets/images/great-white-shark.svg",
+    "hint": "This grey torpedo has a white belly and rows of serrated triangular teeth it never stops replacing.",
+    "decoys": ["Tiger Shark", "Mako Shark"],
+    "funFact": "It can detect a single drop of blood in 100 litres of water and senses the tiny electric fields of hiding prey."
+  },
+  {
+    "id": "clownfish",
+    "commonName": "Clownfish",
+    "scientificName": "Amphiprion ocellaris",
+    "image": "assets/images/clownfish.svg",
+    "hint": "Bright orange with three white bands, it shelters unharmed among the stinging tentacles of a sea anemone.",
+    "decoys": ["Mandarinfish", "Copperband Butterflyfish"],
+    "funFact": "Every clownfish is born male, and the largest of a group can switch to female when the resident female dies."
+  },
+  {
+    "id": "bottlenose-dolphin",
+    "commonName": "Bottlenose Dolphin",
+    "scientificName": "Tursiops truncatus",
+    "image": "assets/images/bottlenose-dolphin.svg",
+    "hint": "A sleek grey mammal with a permanent smile and a curved dorsal fin, famous for leaping and clicking.",
+    "decoys": ["Common Dolphin", "Harbour Porpoise"],
+    "funFact": "Each dolphin invents a unique signature whistle and uses it like a name to call out to friends."
+  },
+  {
+    "id": "green-sea-turtle",
+    "commonName": "Green Sea Turtle",
+    "scientificName": "Chelonia mydas",
+    "image": "assets/images/green-sea-turtle.svg",
+    "hint": "A gentle reptile with a heart-shaped shell and flippers, it grazes seagrass meadows in warm seas.",
+    "decoys": ["Hawksbill Turtle", "Loggerhead Turtle"],
+    "funFact": "It is named for the greenish fat under its shell, coloured by the seagrass and algae it eats."
+  },
+  {
+    "id": "manta-ray",
+    "commonName": "Manta Ray",
+    "scientificName": "Mobula birostris",
+    "image": "assets/images/manta-ray.svg",
+    "hint": "A giant diamond-shaped glider with wing-like fins and two horn-shaped flaps beside its mouth.",
+    "decoys": ["Eagle Ray", "Stingray"],
+    "funFact": "With a wingspan up to seven metres, it has the largest brain of any fish and seems to recognise itself in mirrors."
+  },
+  {
+    "id": "humpback-whale",
+    "commonName": "Humpback Whale",
+    "scientificName": "Megaptera novaeangliae",
+    "image": "assets/images/humpback-whale.svg",
+    "hint": "A huge dark whale with knobbly bumps on its head and enormous wing-like flippers that sings long songs.",
+    "decoys": ["Blue Whale", "Fin Whale"],
+    "funFact": "Males sing complex songs that can last for hours, and whole populations gradually update the same tune."
+  },
+  {
+    "id": "seahorse",
+    "commonName": "Seahorse",
+    "scientificName": "Hippocampus",
+    "image": "assets/images/seahorse.svg",
+    "hint": "A tiny upright fish with a horse-shaped head and a curling tail that grips onto seagrass.",
+    "decoys": ["Pipefish", "Leafy Seadragon"],
+    "funFact": "The males get pregnant, carrying the eggs in a belly pouch until they give birth to tiny fry."
+  },
+  {
+    "id": "orca",
+    "commonName": "Orca",
+    "scientificName": "Orcinus orca",
+    "image": "assets/images/orca.svg",
+    "hint": "A striking black-and-white hunter with a tall dorsal fin, also known as the killer whale.",
+    "decoys": ["Pilot Whale", "False Killer Whale"],
+    "funFact": "It is actually the largest member of the dolphin family, and different pods speak in distinct dialects."
+  },
+  {
+    "id": "whale-shark",
+    "commonName": "Whale Shark",
+    "scientificName": "Rhincodon typus",
+    "image": "assets/images/whale-shark.svg",
+    "hint": "The largest fish in the sea, a gentle giant covered in a unique pattern of white spots and stripes.",
+    "decoys": ["Basking Shark", "Megamouth Shark"],
+    "funFact": "Despite being longer than a bus, it feeds almost entirely on tiny plankton by filtering seawater."
+  },
+  {
+    "id": "pufferfish",
+    "commonName": "Pufferfish",
+    "scientificName": "Tetraodon",
+    "image": "assets/images/pufferfish.svg",
+    "hint": "A slow, big-eyed fish that gulps water to balloon into a spiky sphere when threatened.",
+    "decoys": ["Porcupinefish", "Boxfish"],
+    "funFact": "Its body carries a poison more potent than cyanide, yet it is served as the risky delicacy fugu."
+  },
+  {
+    "id": "moray-eel",
+    "commonName": "Moray Eel",
+    "scientificName": "Gymnothorax",
+    "image": "assets/images/moray-eel.svg",
+    "hint": "A snake-like fish that peers from reef crevices, opening and closing its jaws full of needle teeth.",
+    "decoys": ["Conger Eel", "Wolf Eel"],
+    "funFact": "It has a second set of hidden jaws in its throat that shoot forward to drag prey down, just like the movie Alien."
+  },
+  {
+    "id": "blue-tang",
+    "commonName": "Blue Tang",
+    "scientificName": "Paracanthurus hepatus",
+    "image": "assets/images/blue-tang.svg",
+    "hint": "A vivid royal-blue reef fish with a yellow tail and a bold black palette-shaped marking on its side.",
+    "decoys": ["Regal Angelfish", "Powder Blue Tang"],
+    "funFact": "It hides razor-sharp spines near its tail and can play dead, lying on its side until danger passes."
+  },
+  {
+    "id": "leafy-seadragon",
+    "commonName": "Leafy Seadragon",
+    "scientificName": "Phycodurus eques",
+    "image": "assets/images/leafy-seadragon.svg",
+    "hint": "A relative of the seahorse draped in leaf-shaped flaps that make it look exactly like drifting seaweed.",
+    "decoys": ["Weedy Seadragon", "Ghost Pipefish"],
+    "funFact": "Its leafy limbs are pure camouflage and do no swimming; it drifts using tiny near-invisible fins."
+  }
+]

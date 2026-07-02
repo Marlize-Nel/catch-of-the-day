@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img" aria-label="Sea turtle illustration">
+  <ellipse cx="128" cy="86" rx="66" ry="50" fill="#3f8f5f"/>
+  <path d="M62 96 C40 90 30 96 26 108 C40 112 54 110 66 102 Z" fill="#6fb98a"/>
+  <path d="M74 40 C66 26 54 22 42 26 C48 40 58 48 70 50 Z" fill="#6fb98a"/>
+  <path d="M182 44 C192 30 206 28 218 34 C210 48 198 54 186 54 Z" fill="#6fb98a"/>
+  <path d="M186 118 C198 128 212 130 222 124 C214 112 200 108 188 112 Z" fill="#6fb98a"/>
+  <ellipse cx="66" cy="80" rx="20" ry="16" fill="#4f9f6f"/>
+  <g fill="#2f7f4f">
+    <path d="M128 44 l22 20 -22 20 -22 -20 Z"/>
+    <path d="M96 74 l18 14 -14 18 -20 -10 Z"/>
+    <path d="M160 74 l4 22 -22 6 -6 -20 Z"/>
+  </g>
+  <circle cx="58" cy="76" r="4" fill="#1c2830"/>
+</svg>

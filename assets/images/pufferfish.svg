@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img" aria-label="Pufferfish illustration">
+  <g fill="#e7b84b">
+    <path d="M120 20 l6 20 -12 0 Z"/><path d="M170 30 l-2 20 -14 -6 Z"/><path d="M206 62 l-16 10 -6 -14 Z"/>
+    <path d="M220 100 l-20 2 4 -14 Z"/><path d="M200 138 l-14 -12 12 -8 Z"/><path d="M150 156 l-4 -20 14 4 Z"/>
+    <path d="M100 156 l8 -18 12 8 Z"/><path d="M56 142 l6 -18 12 10 Z"/><path d="M28 108 l18 -6 -2 14 Z"/>
+    <path d="M22 66 l18 8 -10 12 Z"/><path d="M52 34 l10 16 -16 4 Z"/>
+  </g>
+  <circle cx="120" cy="88" r="60" fill="#f2ca63"/>
+  <circle cx="120" cy="98" r="46" fill="#fbe6a8"/>
+  <circle cx="100" cy="76" r="10" fill="#fff"/><circle cx="102" cy="78" r="5" fill="#1c2830"/>
+  <circle cx="142" cy="76" r="10" fill="#fff"/><circle cx="140" cy="78" r="5" fill="#1c2830"/>
+  <path d="M108 108 C118 116 126 116 134 108" stroke="#b98a2a" stroke-width="4" fill="none" stroke-linecap="round"/>
+</svg>

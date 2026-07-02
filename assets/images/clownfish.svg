@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img" aria-label="Clownfish illustration">
+  <path d="M40 80 C70 40 150 40 190 70 C205 60 218 58 226 62 C220 74 220 86 226 98 C218 102 205 100 190 90 C150 120 70 120 40 80 Z" fill="#f47a1f"/>
+  <path d="M78 54 C74 74 74 86 78 106 C90 100 96 88 96 80 C96 72 90 60 78 54 Z" fill="#ffffff"/>
+  <path d="M128 47 C122 70 122 90 128 113 C140 108 146 94 146 80 C146 66 140 52 128 47 Z" fill="#ffffff"/>
+  <path d="M168 56 C176 66 178 74 178 80 C178 86 176 94 168 104 C176 100 184 92 190 90 C186 86 186 74 190 70 C184 68 176 60 168 56 Z" fill="#ffffff"/>
+  <g stroke="#1c2830" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M78 54 C74 74 74 86 78 106"/>
+    <path d="M128 47 C122 70 122 90 128 113"/>
+  </g>
+  <circle cx="62" cy="78" r="7" fill="#1c2830"/>
+  <circle cx="60" cy="76" r="2.5" fill="#fff"/>
+</svg>
