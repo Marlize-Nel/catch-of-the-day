@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catch of the Day — daily marine guessing game</title>
+    <meta
+      name="description"
+      content="A daily marine-animal guessing game. Guess today's species and add it to your aquarium — one species a day, the same for everyone."
+    />
+    <link rel="icon" href="assets/images/clownfish.svg" />
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark">🎣</span>
+        <div>
+          <h1 class="brand-title">Catch of the Day</h1>
+          <p id="date-label" class="brand-date"></p>
+        </div>
+      </div>
+      <nav class="tabs">
+        <button class="tab active" data-view="today">Today</button>
+        <button class="tab" data-view="aquarium">
+          Aquarium <span id="catch-count" class="count-pill">0 caught</span>
+        </button>
+      </nav>
+    </header>
+
+    <main class="app-main">
+      <section id="view-today" class="view view-active"></section>
+      <section id="view-aquarium" class="view"></section>
+    </main>
+
+    <footer class="app-footer">
+      <p>One species a day · the same for everyone · caught fish stay forever.</p>
+    </footer>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>

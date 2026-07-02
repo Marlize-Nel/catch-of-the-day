@@ -12,12 +12,12 @@ See [context.md](context.md) for the full game concept and rules.
 
 | Area | Decision | Notes |
 |------|----------|-------|
-| **Tech stack** | Vanilla **HTML/CSS/JS** (no UI framework) + **Vite** for dev/build | Vite gives a dev server + bundling without pulling in React/Vue etc. |
-| **Hosting** | **GitHub Pages** | Project page at `https://marlize-nel.github.io/catch-of-the-day/` |
-| **Deploy flow** | Push to `main` → **GitHub Actions** builds with Vite and deploys to Pages | "Commit to main → it's live" — no manual deploy step |
+| **Tech stack** | Vanilla **HTML/CSS/JS**, **pure static — no build step** | No Node/Vite available on the machine, and the app needs no bundling. Plain ES modules; served over any static `http://`. |
+| **Hosting** | **GitHub Pages** | Project page at `https://marlize-nel.github.io/catch-of-the-day/`. Relative asset paths, so no base-path config needed. |
+| **Deploy flow** | Push to `main` → **GitHub Actions** publishes the repo as-is to Pages | Static publish (no build). "Commit to main → it's live". |
 | **Target device** | **Desktop / computer** | Design for mouse + keyboard, wider layouts |
-| **Aquarium** | **In-page section** of the website (view/tab), persisted in `localStorage` | Not an OS desktop widget (would need Electron/native) |
-| **Species art** | **Emoji / placeholder first**, swap in cartoon images later | Keeps the game playable immediately |
+| **Aquarium** | **In-page section** (Today / Aquarium tabs), persisted in `localStorage`. Up to **5 species on display**; extras go to a **back aquarium**. | Accumulates across days. Player picks which ≤5 show in the display tank. |
+| **Species art** | **Placeholder SVG first** (silhouette-friendly), swap in Pokémon-style cartoon PNGs later | SVGs double as the "come back tomorrow" black silhouette via a CSS filter. |
 | **Backend** | **None** | All logic client-side; daily species chosen deterministically from the date |
 | **Git workflow** | Commit **straight to `main`** in clean staged steps | Switch to branches/PRs after MVP works |
 
@@ -133,9 +133,20 @@ Commit in clean steps so git history tells the build story:
 
 ---
 
-## 8. Open items / decide later
+## 8. Open items
 
-- **Real artwork**: replace emoji/placeholders with Pokémon-style cartoon images (AI-generated or supplied).
-- **Cross-day aquarium growth**: confirm aquarium simply accumulates over days (assumed yes).
-- **Post-game state**: what the screen shows after today's animal is done (e.g. "come back tomorrow" + aquarium).
-- **PWA install** (optional later): add a manifest so the site can be "installed" to the desktop dock — closest thing to the original desktop-widget idea without native code.
+**Decided (2026-07-02):**
+- **Real artwork** → Pokémon-style cartoon images with the species' distinctive
+  features visible for easy IDing. Built with placeholder SVGs now (wired to the
+  exact filenames in `species.json`); drop in real PNGs later, no code changes.
+- **Cross-day aquarium growth** → accumulates across days. The **display aquarium
+  holds up to 5** chosen species; any extras live in the **back aquarium** and
+  don't show in the display tank/widget. Player picks which ≤5 to display.
+- **Post-game state** → "Come back tomorrow" with a **black silhouette** of the
+  next day's species (Guess-that-Pokémon style), plus the revealed answer + fun
+  fact for today.
+
+**Still open:**
+- **PWA install** (undecided): a manifest could let the site be "installed" to the
+  desktop dock — the closest thing to the original desktop-widget idea without
+  native code. Revisit after MVP.
