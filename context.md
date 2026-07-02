@@ -21,7 +21,7 @@
 - Commit straight to main for now — we'll switch to branches/PRs once we have a working MVP. Commit in clean, staged steps (data file → daily logic → quiz UI → local storage → aquarium view) so the git history tells the build story.
 
 ## Data
-- A data file (JSON) with 10-15 marine vertebrate species — name, image URL from Unsplash, one hint sentence, 2 plausible other species names (for multiple choice one right two wrong), one fun fact
+- A data file (JSON) with 10-15 marine vertebrate species — name, image of the species with its distinctive features visible in a cartoon fashion (sort of like a pokemon), one hint sentence, 2 plausible other species names (for multiple choice one right two wrong), one fun fact
 
 ## Planned workflow
 1. scafold project
