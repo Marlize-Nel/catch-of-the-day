@@ -251,42 +251,207 @@ body {
 .tomorrow-hint { font-style: italic; color: var(--muted); margin: 0.6rem 0 0; }
 
 /* ---- Aquarium ---- */
-.tank {
+/* Glass tank frame: thick rounded "glass", a rim highlight and a wooden base. */
+.aquarium-tank {
   position: relative;
-  height: 280px;
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: linear-gradient(180deg, #2fa3e6 0%, #1c6fb0 55%, #0f4c82 100%);
-  box-shadow: var(--shadow), inset 0 0 60px rgba(3, 26, 46, 0.4);
-  border: 5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 22px;
+  padding: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.15)) border-box;
+  border: 3px solid rgba(255, 255, 255, 0.6);
+  box-shadow: var(--shadow), inset 0 0 0 2px rgba(120, 200, 240, 0.35);
 }
-.tank::after {
+.aquarium-tank::after {
+  /* tank stand / base */
   content: "";
   position: absolute;
-  inset: auto 0 0 0;
-  height: 34px;
-  background: linear-gradient(180deg, transparent, rgba(6, 40, 66, 0.6));
+  left: 8%;
+  right: 8%;
+  bottom: -14px;
+  height: 16px;
+  border-radius: 0 0 10px 10px;
+  background: linear-gradient(180deg, #6b4a2b, #4e341d);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
-.tank-fish {
+
+.tank {
+  position: relative;
+  height: 320px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #43b6ef 0%, #1f7fc2 45%, #0f5590 80%, #0b3f6e 100%);
+  box-shadow: inset 0 0 60px rgba(3, 26, 46, 0.45);
+}
+/* Glass shine across the front. */
+.tank::before {
+  content: "";
   position: absolute;
-  left: -14%;
-  width: 120px;
-  height: auto;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
-  animation-name: swim;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 38%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Shimmering light rays from the surface. */
+.water-rays {
+  position: absolute;
+  inset: -20% -10% 0 -10%;
+  background: repeating-linear-gradient(
+    102deg,
+    rgba(255, 255, 255, 0.10) 0px,
+    rgba(255, 255, 255, 0.10) 22px,
+    rgba(255, 255, 255, 0) 22px,
+    rgba(255, 255, 255, 0) 90px
+  );
+  mix-blend-mode: screen;
+  animation: rays 9s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes rays {
+  from { transform: translateX(-24px) skewX(-2deg); opacity: 0.5; }
+  to   { transform: translateX(24px) skewX(2deg); opacity: 0.9; }
+}
+
+/* Rising bubbles. */
+.bubbles { position: absolute; inset: 0; pointer-events: none; }
+.bubble {
+  position: absolute;
+  bottom: -24px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.15) 60%, rgba(255, 255, 255, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  animation-name: rise;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+}
+@keyframes rise {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 0.9; }
+  50%  { transform: translateY(-160px) translateX(10px); }
+  90%  { opacity: 0.9; }
+  100% { transform: translateY(-330px) translateX(-8px); opacity: 0; }
+}
+
+/* Swimming fish: the outer node crosses the tank, the inner bobs, the image
+   flips to face its direction. Keeping these on separate nodes stops the flip
+   from mirroring the chat bubble. */
+.fish {
+  position: absolute;
+  left: -16%;
+  width: 130px;
+  z-index: 3;
+  animation-name: swim-move;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
-/* Travel the full width of the tank (via `left`), flipping to face the way
-   it's swimming at each end. */
-@keyframes swim {
-  0%   { left: -14%; transform: scaleX(1); }
-  48%  { left: 100%; transform: scaleX(1); }
-  50%  { left: 100%; transform: scaleX(-1); }
-  98%  { left: -14%; transform: scaleX(-1); }
-  100% { left: -14%; transform: scaleX(1); }
+.fish-inner {
+  position: relative;
+  animation: bob 3.6s ease-in-out infinite;
 }
-.tank-empty, .tank .tank-empty { color: var(--foam); text-align: center; padding-top: 120px; }
+.tank-fish-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 5px 7px rgba(0, 0, 0, 0.3));
+  animation-name: swim-flip;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes swim-move {
+  0%   { left: -16%; }
+  48%  { left: 100%; }
+  50%  { left: 100%; }
+  98%  { left: -16%; }
+  100% { left: -16%; }
+}
+@keyframes swim-flip {
+  0%, 48%   { transform: scaleX(1); }
+  50%, 98%  { transform: scaleX(-1); }
+  100%      { transform: scaleX(1); }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50%      { transform: translateY(-10px) rotate(1.5deg); }
+}
+
+/* Chat bubble above a fish. */
+.chat-bubble {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, 8px) scale(0.7);
+  margin-bottom: 10px;
+  min-width: max-content;
+  max-width: 180px;
+  background: #ffffff;
+  color: #0b2233;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 0.7rem;
+  border-radius: 14px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 6;
+}
+.chat-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top-color: #ffffff;
+}
+.chat-bubble.show {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+/* Sandy, planted seabed. */
+.seabed { position: absolute; inset: auto 0 0 0; height: 60px; z-index: 2; }
+.sand {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 34px;
+  background: linear-gradient(180deg, #e9d29a 0%, #d8b877 100%);
+  border-radius: 45% 55% 0 0 / 30px 30px 0 0;
+  box-shadow: inset 0 4px 8px rgba(255, 255, 255, 0.4);
+}
+.plant {
+  position: absolute;
+  bottom: 18px;
+  width: 14px;
+  transform-origin: bottom center;
+  animation: sway 4.5s ease-in-out infinite alternate;
+}
+.plant::before, .plant::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50% 50% 40% 40%;
+}
+.plant-1::before { width: 12px; height: 60px; background: #2f9e57; }
+.plant-1::after  { width: 8px; height: 40px; background: #43c073; left: 70%; }
+.plant-2::before { width: 10px; height: 46px; background: #3aa9a0; }
+.plant-2::after  { width: 7px; height: 30px; background: #5fd0c6; left: 30%; }
+.plant-3::before { width: 9px; height: 70px; background: #6cae3a; }
+.plant-3::after  { width: 6px; height: 46px; background: #8fd15a; left: 68%; }
+@keyframes sway {
+  from { transform: rotate(-6deg); }
+  to   { transform: rotate(6deg); }
+}
+
+.tank-empty, .tank .tank-empty {
+  position: relative;
+  z-index: 4;
+  color: var(--foam);
+  text-align: center;
+  padding-top: 120px;
+}
 
 .aquarium-count { text-align: center; color: var(--foam); margin: 0.75rem 0 1.25rem; font-weight: 600; }
 
@@ -343,6 +508,8 @@ body {
 .error { background: var(--card); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow); }
 
 @media (prefers-reduced-motion: reduce) {
-  .tank-fish { animation: none; left: 20px; position: relative; display: inline-block; margin: 8px; }
-  .tank { height: auto; padding: 1rem; }
+  .fish, .fish-inner, .tank-fish-img, .bubble, .water-rays, .plant { animation: none !important; }
+  .fish { position: relative; left: auto; display: inline-block; width: 120px; margin: 8px; vertical-align: middle; }
+  .tank { height: auto; min-height: 220px; padding: 1rem 1rem 60px; text-align: center; }
+  .chat-bubble { transition: none; }
 }
