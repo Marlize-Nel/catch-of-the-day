@@ -97,15 +97,32 @@ export function initAquarium(container, ctx) {
       return frame;
     }
 
+    // Relative sizing: map real-world length (sizeM) onto a compressed (log)
+    // width range so a whale reads as big and a clownfish as small, but nothing
+    // gets so tiny it can't be seen. Bigger animals also glide a little slower.
+    const sizes = Object.values(speciesById)
+      .map((s) => s.sizeM)
+      .filter((n) => typeof n === 'number' && n > 0);
+    const logMin = Math.log(Math.min(...sizes));
+    const logMax = Math.log(Math.max(...sizes));
+    const MIN_W = 56;
+    const MAX_W = 178;
+    const sizeT = (sp) => {
+      if (!(sp.sizeM > 0) || logMax === logMin) return 0.5;
+      return (Math.log(sp.sizeM) - logMin) / (logMax - logMin);
+    };
+
     const chatFish = [];
     displayIds.forEach((id, i) => {
       const sp = speciesById[id];
       if (!sp) return;
 
+      const t = sizeT(sp);
       const fish = el('div', 'fish');
-      fish.style.top = `${8 + ((i * 37) % 58)}%`;
+      fish.style.width = `${Math.round(MIN_W + t * (MAX_W - MIN_W))}px`;
+      fish.style.top = `${6 + ((i * 29) % 46)}%`;
       fish.style.animationDelay = `${i * -3.5}s`;
-      fish.style.animationDuration = `${13 + (i % 3) * 4}s`;
+      fish.style.animationDuration = `${(12 + t * 9 + (i % 2) * 1.5).toFixed(1)}s`;
 
       const inner = el('div', 'fish-inner');
       inner.style.animationDelay = `${i * -1.3}s`;
