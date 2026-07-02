@@ -70,6 +70,32 @@ body {
 }
 .tab.active .count-pill { background: rgba(11, 34, 51, 0.15); }
 
+/* ---- Demo bar (demo mode only) ---- */
+.demo-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.5rem clamp(1rem, 4vw, 3rem);
+  background: repeating-linear-gradient(45deg, #ffd873, #ffd873 12px, #ffcf52 12px, #ffcf52 24px);
+  color: #5a3d00;
+  font-size: 0.85rem;
+}
+.demo-tag { font-weight: 700; }
+.demo-hint { opacity: 0.8; margin-left: auto; }
+.demo-btn {
+  border: none;
+  background: #5a3d00;
+  color: #fff;
+  padding: 0.35rem 0.7rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.demo-btn:hover { background: #402b00; }
+.demo-reset { background: #b13b3b; }
+.demo-reset:hover { background: #8f2d2d; }
+
 /* ---- Layout ---- */
 .app-main {
   flex: 1;
@@ -242,7 +268,7 @@ body {
 }
 .tank-fish {
   position: absolute;
-  left: -20%;
+  left: -14%;
   width: 120px;
   height: auto;
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
@@ -250,12 +276,14 @@ body {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
+/* Travel the full width of the tank (via `left`), flipping to face the way
+   it's swimming at each end. */
 @keyframes swim {
-  0%   { transform: translateX(0) scaleX(1); }
-  49%  { transform: translateX(130%) scaleX(1); }
-  50%  { transform: translateX(130%) scaleX(-1); }
-  99%  { transform: translateX(0) scaleX(-1); }
-  100% { transform: translateX(0) scaleX(1); }
+  0%   { left: -14%; transform: scaleX(1); }
+  48%  { left: 100%; transform: scaleX(1); }
+  50%  { left: 100%; transform: scaleX(-1); }
+  98%  { left: -14%; transform: scaleX(-1); }
+  100% { left: -14%; transform: scaleX(1); }
 }
 .tank-empty, .tank .tank-empty { color: var(--foam); text-align: center; padding-top: 120px; }
 
