@@ -13,7 +13,8 @@
     2. If they get the wrong name wrong or click the button "I have no idea", the player will have a secong go which will include a clue (along with an empty text box, picture of the animal, and a "I have no idea" button)
     3. If they get the wrong name again or click the button "I have no idea" again, then the player will have one last go which will include a multiple choice with 3 species that it could be. 
 - If the player gets the species name correctly (in either step 1, 2, or 3), they will get a fun fact about the species and be able to include it in their virtual aquarium. 
-- If the player gets the species name incorrectly after three gos, they will have to release it back into the ocean. 
+- If the player gets the species name incorrectly after three gos, they will have to release it back into the ocean and they cannot include it in their aquarium.
+- During the first and second go at guessing, if they have misspelt the name  
 - Right/wrong feedback screen, saved to browser local storage. 
 - I'd like to have a widget with the aquarium showing all species caught so far that you can add on your computer desktop.
 - One species per day, the same species for everyone playing that day.  
