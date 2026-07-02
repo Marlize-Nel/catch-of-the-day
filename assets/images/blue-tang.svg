@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img" aria-label="Blue tang illustration">
-  <path d="M50 84 C64 50 120 42 168 60 C176 46 190 40 202 40 C198 54 198 66 202 80 C198 94 198 106 202 120 C190 120 176 114 168 100 C120 118 64 110 50 84 Z" fill="#1f6fd6"/>
-  <path d="M96 56 C120 52 150 58 168 72 C150 68 120 66 100 74 C92 68 92 60 96 56 Z" fill="#0d4fa8"/>
-  <path d="M168 60 C176 72 176 88 168 100 C186 96 196 84 196 80 C196 76 186 64 168 60 Z" fill="#f2c94c"/>
-  <path d="M50 84 C58 78 66 78 74 82 C66 88 58 88 52 88 Z" fill="#f2c94c"/>
-  <circle cx="72" cy="74" r="6" fill="#1c2830"/>
-  <circle cx="70" cy="72" r="2" fill="#fff"/>
-</svg>

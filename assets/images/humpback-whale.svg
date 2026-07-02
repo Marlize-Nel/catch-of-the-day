@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img" aria-label="Humpback whale illustration">
-  <path d="M22 92 C34 66 70 52 112 54 C158 56 196 58 220 46 C214 66 202 82 182 90 C200 96 212 108 216 122 C196 116 178 108 166 96 C120 108 60 110 30 100 C22 98 18 96 22 92 Z" fill="#37454f"/>
-  <path d="M22 92 C50 84 100 84 150 90 C110 100 60 100 30 98 Z" fill="#9db0bb"/>
-  <path d="M96 96 C88 112 90 128 100 140 C108 128 108 112 104 100 Z" fill="#2a3742"/>
-  <g fill="#556570">
-    <circle cx="40" cy="80" r="3"/><circle cx="52" cy="76" r="3"/><circle cx="64" cy="74" r="3"/><circle cx="46" cy="88" r="3"/>
-  </g>
-  <circle cx="42" cy="94" r="4" fill="#1c2830"/>
-</svg>

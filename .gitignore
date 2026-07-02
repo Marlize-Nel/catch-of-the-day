@@ -1,1 +1,5 @@
 ignore.md
+.DS_Store
+# Source photos for the cutouts live here locally; only the processed
+# transparent PNGs in assets/images/ are committed.
+assets/real images/

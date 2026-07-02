@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img" aria-label="Orca illustration">
-  <path d="M26 106 C40 82 74 70 110 72 C150 74 176 68 210 54 C202 78 184 92 160 98 C172 108 186 112 200 112 C180 124 154 124 132 114 C104 122 58 122 26 106 Z" fill="#111820"/>
-  <path d="M110 60 C118 40 132 30 142 26 C142 46 138 62 130 74 Z" fill="#111820"/>
-  <path d="M26 106 C56 98 96 98 130 106 C104 114 60 114 32 110 Z" fill="#f2f4f5"/>
-  <ellipse cx="70" cy="82" rx="12" ry="7" fill="#f2f4f5"/>
-  <path d="M150 78 C160 80 168 84 174 90 C164 92 154 90 148 84 Z" fill="#c9d4d9"/>
-  <circle cx="56" cy="92" r="4" fill="#1c2830"/>
-</svg>
