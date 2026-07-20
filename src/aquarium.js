@@ -138,11 +138,14 @@ export function initAquarium(container, ctx) {
       inner.append(bubble, img);
       fish.append(inner);
       tank.append(fish);
-      chatFish.push(bubble);
+      chatFish.push({ id, bubble });
     });
 
     tank.append(buildSeabed());
-    scheduleChat(chatFish);
+    // The seahorse is our chatterbox; if it isn't on display, fall back to
+    // rotating through whoever is.
+    const seahorse = chatFish.find((f) => f.id === 'seahorse');
+    scheduleChat(chatFish.map((f) => f.bubble), seahorse ? seahorse.bubble : null);
     return frame;
   }
 
@@ -174,12 +177,13 @@ export function initAquarium(container, ctx) {
     return bed;
   }
 
-  // Rotate through the displayed fish, popping a greeting bubble on each.
-  function scheduleChat(bubbles) {
+  // Pop a greeting bubble every few minutes. If a fixed speaker is given (the
+  // seahorse), it always does the talking; otherwise rotate through the fish.
+  function scheduleChat(bubbles, fixedSpeaker) {
     if (bubbles.length === 0) return;
     let idx = 0;
     const speak = () => {
-      const bubble = bubbles[idx % bubbles.length];
+      const bubble = fixedSpeaker || bubbles[idx % bubbles.length];
       idx += 1;
       bubble.textContent = GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
       bubble.classList.add('show');
